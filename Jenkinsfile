@@ -55,6 +55,29 @@ pipeline {
 				sh "mvn failsafe:integration-test failsafe:verify"
 			}
 		}
+		stage('Package .jar'){
+			steps{
+				sh "mvn package -DskipTests"
+			}
+		}
+		stage('Build docker image'){
+			steps{
+				// sh "docker build -t foloo12/currency-exchange-devops:$env.BUILD_TAG"
+				script{
+					docker.build("foloo12/currency-exchange-devops:${env.BUILD_TAG}")
+				}
+			}
+		}
+		stage('Push docker image'){
+			steps{
+				script{
+					docker.withRegistry('','Docker-hub') {
+						dockerImage.push();
+						dockerImage.push('latest')
+					}
+				}
+			}
+		}
 		// What happens when build fails
 	}
 	post {
