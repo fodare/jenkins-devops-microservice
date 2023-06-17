@@ -42,7 +42,7 @@ pipeline {
 	}
 	post {
 		always{
-			echo 'Build finished. Please check build logs.'
+			echo 'Build finished. Please see result below.'
 		}
 		success {
 			echo 'Build finished successfully!'
