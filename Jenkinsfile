@@ -29,7 +29,7 @@ pipeline {
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
 	}
 	stages{
-		stage('Build'){
+		stage('Checkout'){ // Automatic jenkins behaviour
 			steps{
 				sh 'mvn --version'
 				sh 'docker version'
@@ -40,14 +40,19 @@ pipeline {
 				echo "Build Tag - $env.BUILD_TAG"
 			}
 		}
+		stage('Compile'){
+			steps{
+				sh "mvn clean compile"
+			}
+		}
 		stage('Test'){
 			steps{
-				echo "Test"
+				sh "mvn test"
 			}
 		}
 		stage('Intergation Test'){
 			steps{
-				echo "Intergration test"
+				sh "mvn failsafe:integration-test failsafe:verify"
 			}
 		}
 		// What happens when build fails
