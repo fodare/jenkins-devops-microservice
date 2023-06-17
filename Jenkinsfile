@@ -28,10 +28,10 @@ pipeline {
 			steps{
 				// sh 'mvn --version'
 				echo "Build"
-				echo 'Path - $PATH'
-				echo 'BUILD_NUMBER - $env.BUILD_NUMBER'
-				echo 'Build Id - $env.BUILD_ID'
-				echo 'Build Tag - $env.BUILD_TAG'
+				echo "Path - $PATH"
+				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
+				echo "Build Id - $env.BUILD_ID"
+				echo "Build Tag - $env.BUILD_TAG"
 			}
 		}
 		stage('Test'){
