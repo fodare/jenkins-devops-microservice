@@ -22,7 +22,6 @@
 // Declearative pipeline
 pipeline {
 	agent any
-
 	stages{
 		stage('Build'){
 			steps{
@@ -40,8 +39,8 @@ pipeline {
 			}
 		}
 		// What happens when build fails
-	}  post {
-
+	}
+	post {
 		always{
 			echo 'Build finished. Please check build logs.'
 		}
