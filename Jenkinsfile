@@ -22,6 +22,7 @@
 // Declearative pipeline
 pipeline {
 	agent any
+
 	stages{
 		stage('Build'){
 			steps{
@@ -37,6 +38,18 @@ pipeline {
 			steps{
 				echo "Intergration test"
 			}
+		}
+		// What happens when build fails
+	}  post {
+
+		always{
+			echo 'Build finished. Please check build logs.'
+		}
+		success {
+			echo 'Build finished successfully!'
+		}
+		failure {
+			echo 'Build failed. Please checkout build logs!'
 		}
 	}
 }
